@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<title>アジサイ</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="css/w3.css">
+<link rel="stylesheet" href="css/add.css">
+
+<body>
+    <div class="w3-top w3-hide-small w3-bar w3-red w3-card-2 w3-left-align w3-large read-wide">
+        <a href="index.html" class="w3-bar-item w3-button w3-padding-large w3-white"><b>アジサイ</b></a>
+        <a href="kana.html" class="w3-bar-item w3-button w3-padding-large w3-hover-white">五十音</a>
+        <a href="tango.html" class="w3-bar-item w3-button w3-padding-large w3-hover-white">词汇</a>
+        <a class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" onclick="show_about()">About</a>
+    </div>
+    <div class="w3-hide-medium w3-hide-large">
+        <div class="w3-bar w3-red w3-card-2 w3-left-align w3-large read-wide">
+            <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-red w3-large w3-red"
+                href="#" onclick="toggle_navigation_menu()"><i class="fa fa-bars"></i></a>
+            <a href="index.html" class="w3-bar-item w3-button w3-padding-large w3-white"><b>アジサイ</b></a>
+        </div>
+        <div class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large w3-card-2 ba-choice-menu" id="nav_small">
+            <a href="kana.html" class="w3-bar-item w3-button w3-padding-large">五十音</a>
+            <a href="tango.html" class="w3-bar-item w3-button w3-padding-large">词汇</a>
+            <a class="w3-bar-item w3-button w3-padding-large" onclick="toggle_navigation_menu();show_about()">About</a>
+        </div>
+    </div>
+    <div class="w3-hide-small" style="height: 48px">
+    </div>
+    <div class="w3-modal w3-animate-opacity" id="about_modal" style="padding-top:108px" onclick="this.style.display='none'">
+        <div class="w3-modal-content">
+            <div class="w3-container w3-red">
+                <h3>About</h3>
+            </div>
+            <div class="w3-container">
+                <p style="line-height: 36px">Design & Coding： tcneko &lt;<a href="mailto://tc.neko@outlook.com">tcneko@outlook.com</a>&gt;
+                    <br />Get the source code： <a href="https://github.com/tcneko" target="_blank">GitHub</a>
+                    <br />Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a> &
+                    <a href="http://fontawesome.io/" target="_blank">fontawesome</a> &
+                    <a href="http://bouncejs.com" target="_blank">bounce.js</a></p>
+                <p class="w3-tiny" style="line-height: 24px">站点内容源自网络，仅供学习使用，如有侵权请联系删除。
+                    <br />侵害した場合、削除までご連絡ください。</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggle_navigation_menu() {
+            var x = document.getElementById("nav_small");
+            if (x.className.indexOf("w3-show") == -1) {
+                x.className += " w3-show";
+            } else {
+                x.className = x.className.replace(" w3-show", "");
+            }
+        }
+
+        function show_about() {
+            document.getElementById("about_modal").style.display = "block";
+        }
+    </script>
+
+    <!-- __end_dentifier__ -->
+
+    <div class="w3-row w3-margin-top">
+        <div class="w3-col l3 w3-margin-top">
+            <div class="w3-container ba-choice-button">
+                <button class="w3-button w3-black w3-hover-black" onclick="switch_accordion('main_choice_menu')">功能 <i
+                        class="fa fa-angle-double-down" aria-hidden="true"></i></button>
+                <span id="main_choice_tips" style="margin-left: 32px">还未选择</span>
+            </div>
+            <div class="w3-container ba-choice-menu w3-hide" name="choice_menu" id="main_choice_menu">
+                <div class=" w3-bar-block w3-light-grey">
+                    <button class="w3-bar-item w3-button w3-border-bottom w3-border-white" onClick="main_choice(this,0,false)">中文
+                        <i class="fa fa-angle-right" aria-hidden="true"></i> 日文</button>
+                    <button class="w3-bar-item w3-button w3-border-bottom w3-border-white" onClick="main_choice(this,1,false)">日文
+                        <i class="fa fa-angle-right" aria-hidden="true"></i> 中文</button>
+                    <button class="w3-bar-item w3-button w3-border-bottom w3-border-white" onClick="main_choice(this,2,false)">汉字
+                        <i class="fa fa-angle-right" aria-hidden="true"></i> 假名</button>
+                    <button class="w3-bar-item w3-button w3-border-bottom w3-border-white" onClick="main_choice(this,3,false)">假名
+                        <i class="fa fa-angle-right" aria-hidden="true"></i> 汉字</button>
+                    <button class="w3-bar-item w3-button w3-border-bottom w3-border-white" onClick="main_choice(this,4,false)">词性</button>
+                    <button class="w3-bar-item w3-button w3-border-bottom w3-border-white" onClick="main_choice(this,5,false)">读音</button>
+                </div>
+            </div>
+        </div>
+        <div class="w3-col l3 w3-margin-top w3-hide" name="sub_choice_div" id="lv_choice_div">
+            <div class="w3-container ba-choice-button">
+                <button class="w3-button w3-black w3-hover-black" onclick="switch_accordion('lv_choice_menu')">难度 <i
+                        class="fa fa-angle-double-down" aria-hidden="true"></i></button>
+                <span id="lv_choice_tips" style="margin-left: 32px">任意</span>
+            </div>
+            <div class="w3-container ba-choice-menu w3-hide" name="choice_menu" id="lv_choice_menu">
+                <div class=" w3-bar-block w3-light-grey">
+                    <button class="w3-bar-item w3-button w3-border-bottom w3-border-white" onclick="lv_choice(this,0,false)">任意</button>
+                    <button class="w3-bar-item w3-button w3-border-bottom w3-border-white" onclick="lv_choice(this,1,false)">入门</button>
+                    <button class="w3-bar-item w3-button w3-border-bottom w3-border-white" onclick="lv_choice(this,2,false)">初级</button>
+                    <button class="w3-bar-item w3-button w3-border-bottom w3-border-white" onclick="lv_choice(this,3,false)">中级</button>
+                    <button class="w3-bar-item w3-button w3-border-bottom w3-border-white" onclick="lv_choice(this,4,false)">进阶</button>
+                    <button class="w3-bar-item w3-button w3-border-bottom w3-border-white" onclick="lv_choice(this,5,false)">高级</button>
+                    <button class="w3-bar-item w3-button w3-border-bottom w3-border-white" onclick="lv_choice(this,6,false)">专业</button>
+                </div>
+            </div>
+        </div>
+        <div class="w3-col l3 w3-margin-top w3-hide" name="sub_choice_div" id="hinshi_choice_div">
+            <div class="w3-container ba-choice-button">
+                <button class="w3-button w3-black w3-hover-black" onclick="switch_accordion('hinshi_choice_menu')">词性
+                    <i class="fa fa-angle-double-down" aria-hidden="true"></i></button>
+                <span id="hinshi_choice_tips" style="margin-left: 32px">任意</span>
+            </div>
+            <div class="w3-container ba-choice-menu w3-hide" name="choice_menu" id="hinshi_choice_menu">
+                <div class=" w3-bar-block w3-light-grey">
+                    <button class="w3-bar-item w3-button w3-border-bottom w3-border-white" onclick="hinshi_choice(this,0,false)">任意</button>
+                    <button class="w3-bar-item w3-button w3-border-bottom w3-border-white" onclick="hinshi_choice(this,1,false)">名词</button>
+                    <button class="w3-bar-item w3-button w3-border-bottom w3-border-white" onclick="hinshi_choice(this,2,false)">动词</button>
+                    <button class="w3-bar-item w3-button w3-border-bottom w3-border-white" onclick="hinshi_choice(this,3,false)">形容词</button>
+                    <button class="w3-bar-item w3-button w3-border-bottom w3-border-white" onclick="hinshi_choice(this,4,false)">形容动词</button>
+                    <button class="w3-bar-item w3-button w3-border-bottom w3-border-white" onclick="hinshi_choice(this,5,false)">副词</button>
+                    <button class="w3-bar-item w3-button w3-border-bottom w3-border-white" onclick="hinshi_choice(this,6,false)">其他</button>
+                </div>
+            </div>
+        </div>
+        <div class="w3-col l3 w3-margin-top w3-hide" name="sub_choice_div" id="mode_choice_div">
+            <div class="w3-container ba-choice-button">
+                <button class="w3-button w3-black w3-hover-black" onclick="switch_accordion('mode_choice_menu')">模式 <i
+                        class="fa fa-angle-double-down" aria-hidden="true"></i></button>
+                <span id="mode_choice_tips" style="margin-left: 32px">分组</span>
+            </div>
+            <div class="w3-container ba-choice-menu w3-hide" name="choice_menu" id="mode_choice_menu">
+                <div class=" w3-bar-block w3-light-grey">
+                    <button class="w3-bar-item w3-button w3-border-bottom w3-border-white" onclick="mode_choice(this,0,false)">分组</button>
+                    <button class="w3-bar-item w3-button w3-border-bottom w3-border-white" onclick="mode_choice(this,1,false)">无尽</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="w3-container" id="start_buttonDiv" style="margin-top:32px">
+        <button class="w3-btn w3-red" onclick="start_now()" id="start_button"><i class="fa fa-circle-o-notch"
+                aria-hidden="true"></i>
+            <b>现在开始</b></button>
+        <button class="w3-btn w3-red w3-hide" onclick="stop_now()" id="stop_button"><i class="fa fa-circle-o-notch fa-spin"
+                aria-hidden="true"></i> <b>结束练习</b></button>
+        <span id="start_button_tips" style="margin-left: 32px"></span>
+        <span class="w3-hide-small" id="timer_span" style="margin: 0px 16px 0px 16px"></span>
+        <span id="resault_span" style="margin: 0px 16px 0px 16px"></span>
+    </div>
+    <div class="w3-container" style="margin-top:32px" id="qaDiv">
+        <div class="w3-margin-top w3-large">
+            <div class="w3-panel w3-leftbar w3-border-black read-line" id="qa_quiz">...</div>
+            <div class="w3-panel w3-leftbar w3-border-red read-line" id="qa_answer">...</div>
+            <input class="w3-margin-top w3-input w3-bottombar w3-white w3-border-red" id="qa_input" type="text"
+                disabled="disabled">
+        </div>
+        <div class="w3-margin-top">
+            <button class="w3-btn" id="clean_input">清空输入</button>
+            <button class="w3-btn" id="show_answer">显示答案</button>
+            <button class="w3-btn" id="next_quiz">下一题</button>
+        </div>
+        <div class="w3-animate-bottom read-wide" id="qa_tableDiv" style="margin-top:32px">
+        </div>
+    </div>
+    <div class="w3-container" style="height:72px" id="bottom">
+    </div>
+    <script src="js/tango.js"></script>
+    <script src="js/share.js"></script>
+    <script>
+        init_choice_by_cookie();
+        reset_menu();
+        window.onresize = reset_menu;
+    </script>
+
+
+</body>
+
+</html>

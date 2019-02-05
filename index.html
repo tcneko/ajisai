@@ -1,0 +1,139 @@
+
+<!DOCTYPE html>
+<html>
+<title>アジサイ</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="css/w3.css">
+<link rel="stylesheet" href="css/add.css">
+
+<body>
+    <div class="w3-top w3-hide-small w3-bar w3-red w3-card-2 w3-left-align w3-large read-wide">
+        <a href="index.html" class="w3-bar-item w3-button w3-padding-large w3-white"><b>アジサイ</b></a>
+        <a href="kana.html" class="w3-bar-item w3-button w3-padding-large w3-hover-white">五十音</a>
+        <a href="tango.html" class="w3-bar-item w3-button w3-padding-large w3-hover-white">词汇</a>
+        <a class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" onclick="show_about()">About</a>
+    </div>
+    <div class="w3-hide-medium w3-hide-large">
+        <div class="w3-bar w3-red w3-card-2 w3-left-align w3-large read-wide">
+            <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-red w3-large w3-red"
+                href="#" onclick="toggle_navigation_menu()"><i class="fa fa-bars"></i></a>
+            <a href="index.html" class="w3-bar-item w3-button w3-padding-large w3-white"><b>アジサイ</b></a>
+        </div>
+        <div class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large w3-card-2 ba-choice-menu" id="nav_small">
+            <a href="kana.html" class="w3-bar-item w3-button w3-padding-large">五十音</a>
+            <a href="tango.html" class="w3-bar-item w3-button w3-padding-large">词汇</a>
+            <a class="w3-bar-item w3-button w3-padding-large" onclick="toggle_navigation_menu();show_about()">About</a>
+        </div>
+    </div>
+    <div class="w3-hide-small" style="height: 48px">
+    </div>
+    <div class="w3-modal w3-animate-opacity" id="about_modal" style="padding-top:108px" onclick="this.style.display='none'">
+        <div class="w3-modal-content">
+            <div class="w3-container w3-red">
+                <h3>About</h3>
+            </div>
+            <div class="w3-container">
+                <p style="line-height: 36px">Design & Coding： tcneko &lt;<a href="mailto://tc.neko@outlook.com">tcneko@outlook.com</a>&gt;
+                    <br />Get the source code： <a href="https://github.com/tcneko" target="_blank">GitHub</a>
+                    <br />Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a> &
+                    <a href="http://fontawesome.io/" target="_blank">fontawesome</a> &
+                    <a href="http://bouncejs.com" target="_blank">bounce.js</a></p>
+                <p class="w3-tiny" style="line-height: 24px">站点内容源自网络，仅供学习使用，如有侵权请联系删除。
+                    <br />侵害した場合、削除までご連絡ください。</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggle_navigation_menu() {
+            var x = document.getElementById("nav_small");
+            if (x.className.indexOf("w3-show") == -1) {
+                x.className += " w3-show";
+            } else {
+                x.className = x.className.replace(" w3-show", "");
+            }
+        }
+
+        function show_about() {
+            document.getElementById("about_modal").style.display = "block";
+        }
+    </script>
+
+    <!-- __end_dentifier__ -->
+
+  <div class="w3-row-padding w3-padding-64 w3-container">
+    <div class="w3-content">
+      <div class="w3-twothird w3-left-align w3-row-padding">
+        <p></p>
+      </div>
+      <div class="w3-third w3-center w3-hide-small">
+        <i class="fa fa-quote-right w3-padding-64 w3-text-gray w3-margin-left" style="font-size: 120px"></i>
+        <span name="quoteInfo"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="w3-row-padding w3-light-grey w3-padding-64 w3-container">
+    <div class="w3-content">
+      <div class="w3-third w3-center w3-hide-small">
+        <i class="fa fa-quote-left w3-padding-64 w3-text-gray w3-margin-right" style="font-size: 120px"></i>
+        <span name="quoteInfo"></span>
+      </div>
+      <div class="w3-twothird w3-row-padding ">
+        <p></p>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <script>
+    (function ajaxGetContent() {
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          responseData = JSON.parse(this.responseText);
+          quoteArea = document.getElementsByClassName("w3-twothird");
+          if (responseData.length == quoteArea.length) {
+            for (var ix = 0; ix < quoteArea.length; ++ix) {
+              quoteArea[ix].innerHTML =
+                "<i class='fa fa-3x fa-quote-right fa-pull-right w3-text-grey w3-hide-medium w3-hide-large' aria-hidden='true'></i>" +
+                "<span class='read-wide'><p><span class='w3-xlarge' title='作者: " +
+                responseData[ix]["author"] + "'><b>《" +
+                responseData[ix]["title"] +
+                "》</b></p><p class='w3-large w3-padding-16'><span class='w3-hide-small' style='padding-left: 72px'></span><b>&mdash;&mdash; " +
+                responseData[ix]["view"] +
+                "</b></p><p class='w3-text-grey read-p read-line'>" +
+                responseData[ix]["conetent"] +
+                " <a href='" + responseData[ix]["href"] +
+                "' target='_blank'>[了解更多]</a></p></span>";
+            }
+          }
+        }
+      };
+      xhttp.open("GET", "php/indexContent.php", true);
+      xhttp.send();
+    }());
+  </script>
+
+  <dev id='header_load' />
+
+  <script>
+    function toggleNavigationMenu() {
+      var x = document.getElementById("navSmall");
+      if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+      } else {
+        x.className = x.className.replace(" w3-show", "");
+      }
+    }
+
+    function showAbout() {
+      document.getElementById("aboutModal").style.display = "block";
+    }
+  </script>
+
+</body>
+
+</html>
