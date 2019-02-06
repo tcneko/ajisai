@@ -1,4 +1,4 @@
-drop table tango;
+DROP TABLE tango;
 CREATE TABLE tango (
     tango NVARCHAR(128), 
     kana NVARCHAR(128),

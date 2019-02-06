@@ -1,4 +1,4 @@
-var quiz_table_head = "<table class='w3-table w3-bordered w3-hoverable w3-small w3-animate-bottom' id='qa_table'><tr class='w3-light-grey'><th>Quiz</th><th>Answer</th><th>Score</th></tr>";
+var quiz_table_head = "<table class='w3-table w3-bordered w3-hoverable w3-small w3-animate-bottom' id='qa_table'><tr class='w3-light-grey'><th>Quiz</th><th>Answer</th><th>T/F</th></tr>";
 
 var ix, iy, iz;
 var real_choice = [-1, -1, 0, 0, 0]; // 0:php request, 1:main, 2:lv, 3:hinshi, 4:mode
@@ -153,7 +153,7 @@ function init_quiz() {
     switch (real_choice[1] + 1) {
         case 1:
             for (ix = 0; ix < response_data.length; ++ix) {
-                quiz_data[ix] = response_data[ix]["chs"];
+                quiz_data[ix] = response_data[ix]["chs"] + " [" + response_data[ix]["hinshi"] + "]";
                 if (response_data[ix]["tango"] != response_data[ix]["kana"]) {
                     answer_data[ix] = response_data[ix]["tango"] + "、" + response_data[ix]["kana"];
                 } else {
@@ -163,19 +163,19 @@ function init_quiz() {
             break;
         case 2:
             for (ix = 0; ix < response_data.length; ++ix) {
-                quiz_data[ix] = response_data[ix]["tango"];
+                quiz_data[ix] = response_data[ix]["tango"] + " [" + response_data[ix]["hinshi"] + "]";
                 answer_data[ix] = response_data[ix]["chs"];
             }
             break;
         case 3:
             for (ix = 0; ix < response_data.length; ++ix) {
-                quiz_data[ix] = response_data[ix]["tango"];
+                quiz_data[ix] = response_data[ix]["tango"] + " [" + response_data[ix]["hinshi"] + "]";
                 answer_data[ix] = response_data[ix]["kana"];
             }
             break;
         case 4:
             for (ix = 0; ix < response_data.length; ++ix) {
-                quiz_data[ix] = response_data[ix]["kana"];
+                quiz_data[ix] = response_data[ix]["kana"] + " [" + response_data[ix]["hinshi"] + "]";
                 answer_data[ix] = response_data[ix]["tango"];
             }
             break;
@@ -187,7 +187,7 @@ function init_quiz() {
             break;
         case 6:
             for (ix = 0; ix < response_data.length; ++ix) {
-                quiz_data[ix] = response_data[ix]["tango"];
+                quiz_data[ix] = response_data[ix]["tango"] + " [" + response_data[ix]["hinshi"] + "]";
                 answer_data[ix] = response_data[ix]["ton"];
             }
             break;
@@ -309,7 +309,7 @@ function answer_pre_proc() {
 function check_answer() {
     var answer = document.getElementById("qa_answer").innerHTML;
     var right_flag = [false];
-    if (answer.indexOf("?") != -1 || answer.indexOf("？") != -1) {
+    if (answer.indexOf("?") != -1 || answer.indexOf("？") != -1 || answer.indexOf("。") != -1) {
         show_answer();
         return;
     }

@@ -86,13 +86,13 @@ switch ($choice_main) {
     case 2:
         get_sub_choice_hinshi();
         get_sub_choice_lv();
-        $quarySql = "SELECT tango,kana,chs FROM tango".$quarySqlWhere." ORDER BY random() limit 20";
+        $quarySql = "SELECT tango,kana,chs,hinshi FROM tango".$quarySqlWhere." ORDER BY random() limit 20";
         break;
     case 4:
     case 8:
         get_sub_choice_lv();
         make_where("tango != kana");
-        $quarySql = "SELECT tango,kana FROM tango".$quarySqlWhere." ORDER BY random() limit 20";
+        $quarySql = "SELECT tango,kana,hinshi FROM tango".$quarySqlWhere." ORDER BY random() limit 20";
         break;
     case 16:
         get_sub_choice_lv();
@@ -101,7 +101,7 @@ switch ($choice_main) {
     case 32:
         get_sub_choice_lv();
         make_where("ton IS NOT NULL");
-        $quarySql = "SELECT tango,ton FROM tango".$quarySqlWhere." ORDER BY random() limit 20";
+        $quarySql = "SELECT tango,ton,hinshi FROM tango".$quarySqlWhere." ORDER BY random() limit 20";
         break;
     default:
         die("[]");
