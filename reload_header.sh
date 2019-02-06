@@ -20,8 +20,9 @@ reload_header() {
         if [ -z $end_line ]; then
             continue
         fi
-        sed -i "1,${end_line}d" $ix
-        sed -i "1 r $src_file" $ix
+        cp $ix ${ix}.bak
+        sed "1,${end_line}d" ${ix}.bak | sed "1 r $src_file" | sed '1d' > $ix
+        rm -f ${ix}.bak
     done
 }
 
