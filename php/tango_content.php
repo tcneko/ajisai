@@ -1,17 +1,17 @@
 <?php
-$dir = 'sqlite:../sql/jp.db';
-$quarySql = '';
-$quarySqlWhere = '';
+$db_path = 'sqlite:../../data/jp.db';
+$quary_sql = '';
+$quary_sql_where = '';
 
 $choice = $_GET["c"];
 
 function make_where($cond)
 {
-    global $quarySqlWhere;
-    if ($quarySqlWhere == "") {
-        $quarySqlWhere .= (" WHERE ".$cond);
+    global $quary_sql_where;
+    if ($quary_sql_where == "") {
+        $quary_sql_where .= (" WHERE ".$cond);
     } else {
-        $quarySqlWhere .= (" AND ".$cond);
+        $quary_sql_where .= (" AND ".$cond);
     }
 }
 
@@ -86,22 +86,22 @@ switch ($choice_main) {
     case 2:
         get_sub_choice_hinshi();
         get_sub_choice_lv();
-        $quarySql = "SELECT tango,kana,chs,hinshi FROM tango".$quarySqlWhere." ORDER BY random() limit 20";
+        $quary_sql = "SELECT tango,kana,chs,hinshi FROM tango".$quary_sql_where." ORDER BY random() limit 20";
         break;
     case 4:
     case 8:
         get_sub_choice_lv();
         make_where("tango != kana");
-        $quarySql = "SELECT tango,kana,hinshi FROM tango".$quarySqlWhere." ORDER BY random() limit 20";
+        $quary_sql = "SELECT tango,kana,hinshi FROM tango".$quary_sql_where." ORDER BY random() limit 20";
         break;
     case 16:
         get_sub_choice_lv();
-        $quarySql = "SELECT tango,hinshi FROM tango".$quarySqlWhere." ORDER BY random() limit 20";
+        $quary_sql = "SELECT tango,hinshi FROM tango".$quary_sql_where." ORDER BY random() limit 20";
         break;
     case 32:
         get_sub_choice_lv();
         make_where("ton IS NOT NULL");
-        $quarySql = "SELECT tango,ton,hinshi FROM tango".$quarySqlWhere." ORDER BY random() limit 20";
+        $quary_sql = "SELECT tango,ton,hinshi FROM tango".$quary_sql_where." ORDER BY random() limit 20";
         break;
     default:
         die("[]");
@@ -109,10 +109,9 @@ switch ($choice_main) {
     
 
 try {
-    $dbh = new PDO($dir);
+    $dbh = new PDO($db_path);
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $sth = $dbh->prepare($quarySql);
-    echo $$quarySql;
+    $sth = $dbh->prepare($quary_sql);
     $sth->execute();
     $out = $sth->fetchAll(PDO::FETCH_ASSOC);
     echo json_encode($out);

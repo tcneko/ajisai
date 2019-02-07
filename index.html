@@ -38,7 +38,8 @@
                     <br />Get the source code: <a href="https://github.com/tcneko" target="_blank">GitHub</a>
                     <br />Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a> &
                     <a href="http://fontawesome.io/" target="_blank">fontawesome</a> &
-                    <a href="http://bouncejs.com" target="_blank">bounce.js</a></p>
+                    <a href="http://bouncejs.com" target="_blank">bounce.js</a> & 
+                    <a href="https://github.com/showdownjs/showdown" target="_blank">showdown</a></p>
                 <p class="w3-tiny" style="line-height: 24px">站点内容源自网络，仅供学习使用，如有侵权请联系删除。
                     <br />侵害した場合、削除までご連絡ください。</p>
             </div>
@@ -62,39 +63,60 @@
 
     <!-- __end_dentifier__ -->
 
-    <div class="w3-row-padding w3-padding-64 w3-container">
+    <div class="w3-row-padding w3-padding-32 w3-container">
         <div class="w3-content">
-            <div class="w3-twothird w3-left-align w3-row-padding">
+            <div class="w3-twothird w3-left-align w3-row-padding" name="essei">
                 <p></p>
             </div>
             <div class="w3-third w3-center w3-hide-small">
                 <i class="fa fa-quote-right w3-padding-64 w3-text-gray w3-margin-left" style="font-size: 120px"></i>
-                <span name="quoteInfo"></span>
             </div>
         </div>
     </div>
 
-    <div class="w3-row-padding w3-light-grey w3-padding-64 w3-container">
+    <div class="w3-row-padding w3-light-grey w3-padding-32 w3-container">
         <div class="w3-content">
             <div class="w3-third w3-center w3-hide-small">
                 <i class="fa fa-quote-left w3-padding-64 w3-text-gray w3-margin-right" style="font-size: 120px"></i>
-                <span name="quoteInfo"></span>
             </div>
-            <div class="w3-twothird w3-row-padding ">
+            <div class="w3-twothird w3-row-padding" name="essei">
                 <p></p>
             </div>
         </div>
     </div>
 
+    <div class="w3-row-padding w3-padding-32 w3-container">
+        <div class="w3-content">
+            <div class="w3-twothird w3-left-align w3-row-padding" name="essei">
+                <p></p>
+            </div>
+            <div class="w3-third w3-center w3-hide-small">
+                <i class="fa fa-quote-right w3-padding-64 w3-text-gray w3-margin-left" style="font-size: 120px"></i>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/pub/showdown.min.js"></script>
     <script>
-        (function ajaxGetContent() {
+        function ajax_get_content(obj) {
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function () {
-                if (this.readyState == 4 && this.status == 200) {}
+                if (this.readyState == 4 && this.status == 200) {
+                    var converter = new showdown.Converter();
+                    obj.innerHTML = converter.makeHtml(this.responseText);
+                }
             };
-            xhttp.open("GET", "php/indexContent.php", true);
+            xhttp.open("GET", "php/essei_content.php", true);
             xhttp.send();
-        }());
+        };
+
+        function update_essei() {
+            var essei_array = document.getElementsByName("essei");
+            for (ix = 0; ix < essei_array.length; ++ix) {
+                ajax_get_content(essei_array[ix]);
+            }
+        }
+        update_essei();
     </script>
 
 </body>
