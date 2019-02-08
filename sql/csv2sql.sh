@@ -3,7 +3,7 @@
 # tcneko <tcneko@outlook.com>
 # create: 2017.04
 # last update: 2019.02
-# last test environment: ubuntu
+# last test environment: ubuntu 18.04
 # description:
 
 export PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
